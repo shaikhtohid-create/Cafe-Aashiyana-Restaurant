@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cafe Aashiyana Restaurant – Govandi, Mumbai</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   RESET & VARIABLES
+══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --crimson:#8B0000;--red:#C0392B;--orange:#E67E22;--gold:#F39C12;
+  --cream:#FDF6EC;--warm:#FEF9F3;--dark:#1A0A00;--charcoal:#2C1810;
+  --muted:#7A5C4A;--border:#E8D5C0;--shadow:rgba(139,0,0,.18);
+  --ff-head:'Playfair Display',serif;--ff-body:'Nunito',sans-serif;--tr:.3s ease;
+  /* Admin */
+  --adm-bg:#0F1117;--adm-surface:#1A1D27;--adm-card:#22263A;
+  --adm-border:#2E3250;--adm-accent:#6C63FF;--adm-green:#27AE60;
+  --adm-red:#E74C3C;--adm-gold:#F39C12;--adm-text:#E2E8F0;--adm-muted:#94A3B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--cream);color:var(--charcoal);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px}
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+#navbar{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:70px;
+  background:rgba(26,10,0,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(230,126,34,.25);transition:background var(--tr)
+}
+.nav-brand{display:flex;flex-direction:column}
+.nav-brand .name{font-family:var(--ff-head);font-size:1.25rem;color:var(--gold);letter-spacing:.5px}
+.nav-brand .sub{font-size:.65rem;color:var(--orange);letter-spacing:2px;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:.85rem;font-weight:600;color:#ddd;letter-spacing:1px;text-transform:uppercase;position:relative;transition:color var(--tr)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width var(--tr)}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-order{background:var(--red);color:#fff!important;padding:.45rem 1.1rem;border-radius:4px;transition:background var(--tr)!important}
+.nav-order:hover{background:var(--orange)!important}
+.nav-admin-btn{background:rgba(108,99,255,.2);color:#a99fff!important;padding:.45rem 1rem;border-radius:4px;border:1px solid rgba(108,99,255,.4);font-size:.78rem!important;transition:all var(--tr)!important}
+.nav-admin-btn:hover{background:rgba(108,99,255,.4)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{display:block;width:25px;height:2px;background:var(--gold);border-radius:2px;transition:var(--tr)}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero{
+  height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:0 5%;position:relative;overflow:hidden
+}
+#heroInner{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,rgba(26,10,0,.88) 0%,rgba(139,0,0,.65) 60%,rgba(230,126,34,.4) 100%);
+}
+#heroBgImg{
+  position:absolute;inset:0;z-index:-1;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80');
+}
+#hero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,rgba(243,156,18,.08) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2}
+.hero-badge{display:inline-block;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(243,156,18,.5);padding:.4rem 1.2rem;border-radius:20px;margin-bottom:1.5rem;animation:fadeDown .8s ease both}
+.hero-title{font-family:var(--ff-head);font-size:clamp(2.8rem,7vw,5.5rem);color:#fff;line-height:1.1;margin-bottom:.8rem;animation:fadeDown .8s .2s ease both}
+.hero-title span{color:var(--gold);font-style:italic}
+.hero-tagline{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.8);margin-bottom:2.5rem;animation:fadeDown .8s .4s ease both}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeDown .8s .6s ease both}
+.btn-primary{background:var(--red);color:#fff;padding:.85rem 2rem;border-radius:5px;font-weight:700;font-size:.95rem;letter-spacing:.5px;border:2px solid var(--red);transition:all var(--tr)}
+.btn-primary:hover{background:transparent;color:var(--red)}
+.btn-outline{background:transparent;color:#fff;padding:.85rem 2rem;border-radius:5px;font-weight:700;font-size:.95rem;border:2px solid rgba(255,255,255,.5);transition:all var(--tr)}
+.btn-outline:hover{background:#fff;color:var(--charcoal);border-color:#fff}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.5);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;animation:bob 2s ease-in-out infinite;z-index:2}
+.hero-scroll::before{content:'';width:1px;height:40px;background:rgba(255,255,255,.3)}
+
+/* ══════════════════════════════════════════
+   SECTION BASE
+══════════════════════════════════════════ */
+section{padding:90px 5%}
+.section-label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:.5rem}
+.section-title{font-family:var(--ff-head);font-size:clamp(2rem,4vw,3rem);color:var(--charcoal);margin-bottom:1rem}
+.section-title span{color:var(--red);font-style:italic}
+.section-divider{display:flex;align-items:center;gap:.8rem;margin-bottom:3rem}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-divider-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+#about{background:var(--warm)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-img-wrap{position:relative}
+#aboutImg{width:100%;aspect-ratio:4/5;border-radius:12px;background-size:cover;background-position:center;background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80');box-shadow:20px 20px 0 var(--border)}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--red);color:#fff;width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--ff-head);box-shadow:0 8px 30px var(--shadow)}
+.about-badge .yrs{font-size:2rem;font-weight:700;line-height:1}
+.about-badge .yrs-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1.2rem}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.feature-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.2rem;text-align:center;transition:transform var(--tr),box-shadow var(--tr)}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px var(--shadow)}
+.feature-icon{font-size:1.8rem;margin-bottom:.5rem}
+.feature-card h4{font-size:.85rem;font-weight:700;color:var(--charcoal)}
+.feature-card p{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+
+/* ══════════════════════════════════════════
+   MENU
+══════════════════════════════════════════ */
+#menu{background:var(--cream)}
+.menu-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem}
+.menu-tab{padding:.5rem 1.4rem;border-radius:25px;border:2px solid var(--border);background:#fff;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all var(--tr)}
+.menu-tab.active,.menu-tab:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.menu-category{display:none}
+.menu-category.active{display:block;animation:fadeIn .4s ease}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.menu-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:transform var(--tr),box-shadow var(--tr)}
+.menu-item:hover{transform:translateY(-3px);box-shadow:0 10px 25px var(--shadow)}
+.menu-item-info{flex:1}
+.menu-item-name{font-weight:700;font-size:.92rem;color:var(--charcoal);margin-bottom:.25rem}
+.menu-item-price{color:var(--red);font-weight:700;font-size:1rem;font-family:var(--ff-head)}
+.order-btn{background:var(--red);color:#fff;border:none;padding:.45rem .9rem;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;transition:background var(--tr);white-space:nowrap;font-family:var(--ff-body)}
+.order-btn:hover{background:var(--orange)}
+
+/* ══════════════════════════════════════════
+   GALLERY
+══════════════════════════════════════════ */
+#gallery{background:var(--charcoal)}
+#gallery .section-label{color:var(--gold)}
+#gallery .section-title{color:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.gallery-item{border-radius:8px;overflow:hidden;cursor:pointer;position:relative}
+.gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block;min-height:200px}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-overlay{position:absolute;inset:0;background:rgba(139,0,0,.5);opacity:0;transition:opacity var(--tr);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem}
+.gallery-item:hover .gallery-overlay{opacity:1}
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact{background:var(--warm)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem}
+.contact-card{display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;transition:box-shadow var(--tr)}
+.contact-card:hover{box-shadow:0 8px 25px var(--shadow)}
+.contact-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+.contact-card h4{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:.3rem}
+.contact-card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+.contact-card a{color:var(--red);font-weight:600}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem}
+.hours-row{display:contents}
+.hours-row span:first-child{color:var(--charcoal);font-weight:600;font-size:.85rem}
+.hours-row span:last-child{color:var(--muted);font-size:.85rem}
+.map-wrap{border-radius:12px;overflow:hidden;height:100%;min-height:380px;border:3px solid var(--border)}
+.map-wrap iframe{width:100%;height:100%;min-height:380px;border:none}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--dark);color:rgba(255,255,255,.7);padding:60px 5% 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .name{font-family:var(--ff-head);font-size:1.6rem;color:var(--gold)}
+.footer-brand p{margin-top:.8rem;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.55)}
+.footer-col h5{color:#fff;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{font-size:.88rem;color:rgba(255,255,255,.55);transition:color var(--tr)}
+.footer-col ul li a:hover{color:var(--gold)}
+.social-links{display:flex;gap:.8rem;margin-top:1.2rem}
+.social-link{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;color:rgba(255,255,255,.6);transition:all var(--tr)}
+.social-link:hover{background:var(--red);border-color:var(--red);color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.35)}
+.footer-bottom a{color:var(--gold)}
+
+/* ══════════════════════════════════════════
+   WHATSAPP FLOAT
+══════════════════════════════════════════ */
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.5);animation:pulse 2.5s infinite;transition:transform var(--tr)}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:30px;height:30px;fill:#fff}
+
+/* ══════════════════════════════════════════
+   ORDER MODAL
+══════════════════════════════════════════ */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-backdrop.open{display:flex;animation:fadeIn .25s ease}
+.modal{background:#fff;border-radius:16px;width:90%;max-width:440px;padding:2rem;position:relative;animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--border);border:none;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background var(--tr)}
+.modal-close:hover{background:var(--red);color:#fff}
+.modal-header{margin-bottom:1.5rem}
+.modal-header .label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
+.modal-header h3{font-family:var(--ff-head);font-size:1.4rem;color:var(--charcoal);margin-top:.2rem}
+.modal-price{color:var(--red);font-weight:700;font-family:var(--ff-head);font-size:1.1rem}
+.qty-row{display:flex;align-items:center;gap:1rem;margin:1.5rem 0}
+.qty-row label{font-weight:700;font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;flex:1}
+.qty-ctrl{display:flex;align-items:center;gap:.6rem}
+.qty-btn{width:34px;height:34px;border-radius:50%;border:2px solid var(--border);background:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;color:var(--charcoal);display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.qty-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.qty-num{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center;color:var(--charcoal)}
+.total-row{background:var(--cream);border-radius:8px;padding:.9rem 1.1rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.total-row span:first-child{font-size:.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.total-amount{font-family:var(--ff-head);font-size:1.4rem;color:var(--red);font-weight:700}
+.payment-options{margin-bottom:1.5rem}
+.payment-options h4{font-size:.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:.8rem}
+.pay-option{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border:2px solid var(--border);border-radius:8px;margin-bottom:.5rem;cursor:pointer;transition:border-color var(--tr)}
+.pay-option:has(input:checked){border-color:var(--red);background:#fff5f5}
+.pay-option input{accent-color:var(--red);width:16px;height:16px;cursor:pointer}
+.pay-option label{font-weight:600;font-size:.9rem;cursor:pointer;flex:1}
+.upi-section{display:none;text-align:center;margin-bottom:1.5rem;padding:1rem;background:var(--cream);border-radius:8px}
+.upi-section.show{display:block;animation:fadeIn .3s ease}
+.qr-placeholder{width:140px;height:140px;margin:0 auto 1rem;border:2px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.qr-placeholder img{width:100%;height:100%;object-fit:contain}
+.upi-id-display{font-weight:700;color:var(--charcoal);font-size:.9rem;background:#fff;border:1px solid var(--border);border-radius:6px;padding:.5rem 1rem;display:inline-block}
+.confirm-btn{width:100%;padding:.95rem;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:var(--ff-body);display:flex;align-items:center;justify-content:center;gap:.5rem;background:#25D366;color:#fff;transition:background var(--tr),transform var(--tr)}
+.confirm-btn:hover{background:#1DA851;transform:translateY(-2px)}
+.confirm-btn.cod{background:var(--red)}
+.confirm-btn.cod:hover{background:var(--crimson)}
+
+/* ══════════════════════════════════════════
+   ADMIN PANEL
+══════════════════════════════════════════ */
+#adminOverlay{display:none;position:fixed;inset:0;z-index:99999;background:var(--adm-bg);overflow-y:auto;animation:fadeIn .3s ease}
+#adminOverlay.open{display:block}
+
+/* Login Screen */
+.adm-login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 60% 40%,rgba(108,99,255,.15) 0%,transparent 60%),var(--adm-bg)}
+.adm-login-card{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:20px;padding:3rem;width:90%;max-width:400px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.adm-login-icon{font-size:3rem;margin-bottom:1rem}
+.adm-login-card h2{font-family:var(--ff-head);font-size:1.8rem;color:var(--adm-text);margin-bottom:.3rem}
+.adm-login-card p{color:var(--adm-muted);font-size:.9rem;margin-bottom:2rem}
+.adm-input{width:100%;background:var(--adm-card);border:1px solid var(--adm-border);border-radius:10px;padding:.85rem 1.1rem;color:var(--adm-text);font-family:var(--ff-body);font-size:.95rem;margin-bottom:1rem;transition:border-color var(--tr);outline:none}
+.adm-input:focus{border-color:var(--adm-accent)}
+.adm-input::placeholder{color:var(--adm-muted)}
+.adm-btn{width:100%;padding:.9rem;border:none;border-radius:10px;background:var(--adm-accent);color:#fff;font-family:var(--ff-body);font-size:1rem;font-weight:700;cursor:pointer;transition:all var(--tr)}
+.adm-btn:hover{background:#5a52e0;transform:translateY(-2px)}
+.adm-login-hint{margin-top:1.2rem;font-size:.78rem;color:var(--adm-muted)}
+
+/* Admin Layout */
+.adm-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.adm-sidebar{background:var(--adm-surface);border-right:1px solid var(--adm-border);padding:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.adm-sidebar-header{padding:1.5rem;border-bottom:1px solid var(--adm-border)}
+.adm-sidebar-header .logo{font-family:var(--ff-head);font-size:1.1rem;color:var(--adm-gold);margin-bottom:.2rem}
+.adm-sidebar-header .sub{font-size:.7rem;color:var(--adm-muted);letter-spacing:2px;text-transform:uppercase}
+.adm-nav{padding:1rem 0;flex:1}
+.adm-nav-item{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.5rem;color:var(--adm-muted);cursor:pointer;transition:all var(--tr);border-left:3px solid transparent;font-size:.9rem;font-weight:600}
+.adm-nav-item:hover{color:var(--adm-text);background:rgba(255,255,255,.04)}
+.adm-nav-item.active{color:var(--adm-accent);background:rgba(108,99,255,.1);border-left-color:var(--adm-accent)}
+.adm-nav-item .icon{font-size:1.1rem;width:20px;text-align:center}
+.adm-sidebar-footer{padding:1rem 1.5rem;border-top:1px solid var(--adm-border)}
+.adm-logout-btn{width:100%;padding:.7rem;background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);border-radius:8px;color:#e74c3c;font-family:var(--ff-body);font-weight:700;font-size:.85rem;cursor:pointer;transition:all var(--tr)}
+.adm-logout-btn:hover{background:rgba(231,76,60,.3)}
+.adm-main{background:var(--adm-bg);padding:2.5rem;overflow-y:auto}
+.adm-page{display:none}
+.adm-page.active{display:block;animation:fadeIn .3s ease}
+.adm-page-title{font-family:var(--ff-head);font-size:1.8rem;color:var(--adm-text);margin-bottom:.4rem}
+.adm-page-sub{color:var(--adm-muted);font-size:.9rem;margin-bottom:2rem}
+
+/* Dashboard Stats */
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-bottom:2rem}
+.adm-stat{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:14px;padding:1.4rem;transition:transform var(--tr)}
+.adm-stat:hover{transform:translateY(-3px)}
+.adm-stat .s-icon{font-size:1.8rem;margin-bottom:.8rem}
+.adm-stat .s-val{font-size:1.8rem;font-weight:700;color:var(--adm-text);font-family:var(--ff-head)}
+.adm-stat .s-label{font-size:.8rem;color:var(--adm-muted);margin-top:.2rem}
+.adm-card{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+.adm-card-title{font-size:1rem;font-weight:700;color:var(--adm-text);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+
+/* Form Controls */
+.adm-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.adm-form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.adm-label{font-size:.8rem;font-weight:700;color:var(--adm-muted);letter-spacing:1px;text-transform:uppercase}
+.adm-field{background:var(--adm-card);border:1px solid var(--adm-border);border-radius:8px;padding:.75rem 1rem;color:var(--adm-text);font-family:var(--ff-body);font-size:.9rem;width:100%;outline:none;transition:border-color var(--tr)}
+.adm-field:focus{border-color:var(--adm-accent)}
+.adm-field::placeholder{color:var(--adm-muted)}
+select.adm-field option{background:var(--adm-card);color:var(--adm-text)}
+.adm-btn-sm{padding:.55rem 1.1rem;border:none;border-radius:7px;font-family:var(--ff-body);font-size:.82rem;font-weight:700;cursor:pointer;transition:all var(--tr)}
+.adm-btn-primary{background:var(--adm-accent);color:#fff}
+.adm-btn-primary:hover{background:#5a52e0}
+.adm-btn-success{background:var(--adm-green);color:#fff}
+.adm-btn-success:hover{background:#1e8449}
+.adm-btn-danger{background:rgba(231,76,60,.2);color:#e74c3c;border:1px solid rgba(231,76,60,.3)}
+.adm-btn-danger:hover{background:rgba(231,76,60,.4)}
+.adm-btn-warning{background:rgba(243,156,18,.2);color:var(--adm-gold);border:1px solid rgba(243,156,18,.3)}
+.adm-btn-warning:hover{background:rgba(243,156,18,.4)}
+
+/* Menu Table */
+.adm-table{width:100%;border-collapse:collapse}
+.adm-table th{background:var(--adm-card);color:var(--adm-muted);font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--adm-border)}
+.adm-table td{padding:.75rem 1rem;border-bottom:1px solid rgba(46,50,80,.5);color:var(--adm-text);font-size:.88rem;vertical-align:middle}
+.adm-table tr:hover td{background:rgba(255,255,255,.02)}
+.adm-badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-size:.72rem;font-weight:700}
+.adm-badge-active{background:rgba(39,174,96,.15);color:#27ae60}
+.adm-badge-cat{background:rgba(108,99,255,.15);color:#a99fff}
+.adm-actions{display:flex;gap:.4rem}
+
+/* Image Upload */
+.img-upload-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem}
+.img-upload-card{background:var(--adm-card);border:1px solid var(--adm-border);border-radius:12px;overflow:hidden;transition:transform var(--tr)}
+.img-upload-card:hover{transform:translateY(-3px)}
+.img-upload-card .img-preview{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:rgba(255,255,255,.05)}
+.img-upload-card .img-info{padding:.8rem}
+.img-upload-card .img-label{font-size:.8rem;font-weight:700;color:var(--adm-text);margin-bottom:.5rem}
+.img-upload-card .img-url-input{width:100%;background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:6px;padding:.45rem .7rem;color:var(--adm-text);font-size:.75rem;font-family:var(--ff-body);outline:none;margin-bottom:.5rem}
+.img-upload-card .img-url-input:focus{border-color:var(--adm-accent)}
+
+/* QR Upload */
+.qr-mgmt{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.qr-preview-box{background:var(--adm-card);border:1px solid var(--adm-border);border-radius:12px;padding:1.5rem;text-align:center}
+.qr-preview-box img{width:160px;height:160px;object-fit:contain;border-radius:8px;margin-bottom:1rem;background:#fff;padding:.5rem}
+.qr-preview-box .qr-uid{font-size:.95rem;font-weight:700;color:var(--adm-text);margin-bottom:.3rem}
+.qr-preview-box .qr-sub{font-size:.78rem;color:var(--adm-muted)}
+
+/* Alert / Toast */
+.adm-toast{position:fixed;bottom:2rem;right:2rem;z-index:999999;background:var(--adm-green);color:#fff;padding:.9rem 1.5rem;border-radius:10px;font-weight:700;font-size:.9rem;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:slideUp .3s ease;display:none}
+.adm-toast.show{display:block}
+.adm-toast.error{background:var(--adm-red)}
+
+/* Settings */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+@keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(37,211,102,.5)}50%{box-shadow:0 6px 40px rgba(37,211,102,.8)}}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:1000px){
+  .adm-layout{grid-template-columns:1fr}
+  .adm-sidebar{height:auto;position:relative}
+  .adm-nav{display:flex;flex-wrap:wrap;padding:.5rem}
+  .adm-nav-item{border-left:none;border-bottom:3px solid transparent;padding:.6rem 1rem;font-size:.8rem}
+  .adm-nav-item.active{border-bottom-color:var(--adm-accent);border-left-color:transparent}
+  .qr-mgmt,.settings-grid,.adm-form-row{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .about-img-wrap{max-width:420px;margin:0 auto}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:span 2}
+}
+@media(max-width:700px){
+  .nav-links{display:none;flex-direction:column;position:fixed;top:70px;left:0;width:100%;background:rgba(26,10,0,.97);padding:1.5rem 5%;gap:1.2rem}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-item:nth-child(1){grid-column:span 2}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+  .about-features{grid-template-columns:1fr 1fr}
+  .img-upload-grid{grid-template-columns:1fr 1fr}
+  .adm-main{padding:1.2rem}
+}
+@media(max-width:480px){
+  section{padding:70px 4%}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item:nth-child(1){grid-column:auto}
+  .img-upload-grid{grid-template-columns:1fr}
+  .adm-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <span class="name">Cafe Aashiyana</span>
+    <span class="sub">Restaurant</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:+919082647911" class="nav-order">📞 Call Now</a>
+    <a href="#" class="nav-admin-btn" onclick="openAdmin(event)">⚙️ Admin</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div id="heroBgImg"></div>
+  <div id="heroInner"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Welcome to Govandi, Mumbai ✦</div>
+    <h1 class="hero-title">Cafe <span>Aashiyana</span></h1>
+    <p class="hero-tagline" id="heroTagline">We Serve The Best Quality Food</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">🍽️ View Menu</a>
+      <a href="tel:+919082647911" class="btn-outline">📞 Call Now</a>
+    </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-grid fade-up">
+    <div class="about-img-wrap">
+      <div id="aboutImg"></div>
+      <div class="about-badge">
+        <span class="yrs">10+</span>
+        <span class="yrs-label">Years</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">Flavours Crafted <span>With Love</span></h2>
+      <div class="section-divider"><div class="section-divider-dot"></div></div>
+      <p>Nestled in the heart of Shivaji Nagar, Govandi, Cafe Aashiyana has been serving the community with authentic, rich, and flavourful meals crafted from the freshest ingredients sourced daily.</p>
+      <p>Our kitchen draws inspiration from traditional Mughal and Hyderabadi culinary arts, blending timeless recipes with contemporary taste. Every dish is prepared with care, patience, and an unwavering commitment to quality.</p>
+      <p>Whether you visit us for a family gathering or a quick meal, our welcoming ambience and heartwarming food will make you feel right at home – because Aashiyana means <em>home</em>.</p>
+      <div class="about-features">
+        <div class="feature-card"><div class="feature-icon">🌿</div><h4>Fresh Ingredients</h4><p>Locally sourced, daily fresh</p></div>
+        <div class="feature-card"><div class="feature-icon">👨‍🍳</div><h4>Expert Chefs</h4><p>Trained in Mughal cuisine</p></div>
+        <div class="feature-card"><div class="feature-icon">🏆</div><h4>Quality First</h4><p>No compromise on taste</p></div>
+        <div class="feature-card"><div class="feature-icon">🚀</div><h4>Quick Delivery</h4><p>Hot meals, on time</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MENU
+══════════════════════════════════════════ -->
+<section id="menu">
+  <div class="fade-up" style="text-align:center">
+    <div class="section-label">Our Specialities</div>
+    <h2 class="section-title">Explore Our <span>Full Menu</span></h2>
+    <div class="section-divider" style="max-width:500px;margin:0 auto 2rem"><div class="section-divider-dot"></div></div>
+  </div>
+  <div class="menu-tabs fade-up" id="menuTabs"></div>
+  <div id="menuContent"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="fade-up" style="text-align:center">
+    <div class="section-label">Food Gallery</div>
+    <h2 class="section-title" style="color:#fff">A Feast <span>For The Eyes</span></h2>
+    <div class="section-divider" style="max-width:500px;margin:0 auto 2.5rem"><div class="section-divider-dot"></div></div>
+  </div>
+  <div class="gallery-grid fade-up" id="galleryGrid"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="fade-up" style="text-align:center;margin-bottom:3rem">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">Visit <span>Aashiyana</span></h2>
+    <div class="section-divider" style="max-width:500px;margin:0 auto"><div class="section-divider-dot"></div></div>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-info">
+      <div class="contact-card"><div class="contact-icon">📍</div><div><h4>Address</h4><p id="contactAddress">Aashiyana Restaurant, Shivaji Nagar,<br>Govandi, Mumbai – 400043</p></div></div>
+      <div class="contact-card"><div class="contact-icon">📞</div><div><h4>Phone / WhatsApp</h4><p><a href="tel:+919082647911" id="contactPhone">+91 90826 47911</a></p><p><a href="https://wa.me/919082647911" target="_blank">Chat on WhatsApp →</a></p></div></div>
+      <div class="contact-card"><div class="contact-icon">⏰</div><div><h4>Opening Hours</h4><div class="hours-grid"><span>Mon – Thu</span><span>11:00 AM – 11:00 PM</span><span>Fri – Sat</span><span>10:00 AM – 12:00 AM</span><span>Sunday</span><span>10:00 AM – 11:00 PM</span></div></div></div>
+      <div class="contact-card"><div class="contact-icon">💳</div><div><h4>UPI Payment</h4><p><strong id="contactUpi">9082647911@fam</strong></p><p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">PhonePe / GPay / Paytm accepted</p></div></div>
+    </div>
+    <div class="map-wrap"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.107!2d72.916!3d19.065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c5b3b3b3b3b3%3A0x1!2sShivaji%20Nagar%2C%20Govandi%2C%20Mumbai%2C%20Maharashtra%20400043!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location"></iframe></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="name">Cafe Aashiyana</div>
+      <p>Where every meal is a memory. Serving authentic Mughal and Hyderabadi flavours in the heart of Govandi, Mumbai.</p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="Facebook">f</a>
+        <a class="social-link" href="#" title="Instagram">✦</a>
+        <a class="social-link" href="https://wa.me/919082647911" title="WhatsApp" target="_blank">💬</a>
+        <a class="social-link" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="#hero">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#menu">Full Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:+919082647911">+91 90826 47911</a></li><li><a href="https://wa.me/919082647911">WhatsApp Order</a></li><li><a href="#">Shivaji Nagar, Govandi</a></li><li><a href="#">Mumbai – 400043</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Cafe Aashiyana Restaurant. All rights reserved.</span><span>Made with ❤️ in Mumbai</span></div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     WHATSAPP FLOAT
+══════════════════════════════════════════ -->
+<a class="whatsapp-float" href="https://wa.me/919082647911" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══════════════════════════════════════════
+     ORDER MODAL
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOnBackdrop(event)">
+  <div class="modal" id="orderModal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="label">Place Your Order</div>
+      <h3 id="modalItemName">Item Name</h3>
+      <div class="modal-price" id="modalItemPrice">₹0</div>
+    </div>
+    <div class="qty-row">
+      <label>Quantity</label>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="qtyDisplay">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+    <div class="total-row">
+      <span>Total Amount</span>
+      <span class="total-amount" id="totalDisplay">₹0</span>
+    </div>
+    <div class="payment-options">
+      <h4>Payment Method</h4>
+      <div class="pay-option" onclick="selectPayment('cod')">
+        <input type="radio" name="payment" id="payCod" value="cod"/>
+        <label for="payCod">💵 Cash on Delivery</label>
+      </div>
+      <div class="pay-option" onclick="selectPayment('upi')">
+        <input type="radio" name="payment" id="payUpi" value="upi"/>
+        <label for="payUpi">📲 Pay via UPI</label>
+      </div>
+    </div>
+    <div class="upi-section" id="upiSection">
+      <div class="qr-placeholder">
+        <img id="modalQrImg" src="" alt="QR Code"/>
+      </div>
+      <div class="upi-id-display" id="modalUpiId">9082647911@fam</div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:.6rem">Scan &amp; pay, then tap below</p>
+    </div>
+    <button class="confirm-btn" id="confirmBtn" onclick="confirmOrder()">
+      <span>📱</span><span id="confirmBtnText">Select Payment Method</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════════ -->
+<div id="adminOverlay">
+  <!-- Login -->
+  <div id="adminLogin" class="adm-login">
+    <div class="adm-login-card">
+      <div class="adm-login-icon">🔐</div>
+      <h2>Admin Panel</h2>
+      <p>Cafe Aashiyana Management</p>
+      <input class="adm-input" type="text" id="adminUser" placeholder="Username" autocomplete="off"/>
+      <input class="adm-input" type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="adm-btn" onclick="doLogin()">Login to Admin</button>
+      <div class="adm-login-hint">Default: admin / aashiyana2024</div>
+      <div style="margin-top:1rem"><button style="background:none;border:none;color:var(--adm-muted);cursor:pointer;font-size:.82rem" onclick="closeAdmin()">← Back to Website</button></div>
+    </div>
+  </div>
+  <!-- Dashboard -->
+  <div id="adminDashboard" style="display:none">
+    <div class="adm-layout">
+      <!-- Sidebar -->
+      <aside class="adm-sidebar">
+        <div class="adm-sidebar-header">
+          <div class="logo">Cafe Aashiyana</div>
+          <div class="sub">Admin Panel</div>
+        </div>
+        <nav class="adm-nav">
+          <div class="adm-nav-item active" onclick="admPage('dashboard',this)"><span class="icon">📊</span> Dashboard</div>
+          <div class="adm-nav-item" onclick="admPage('menu-mgmt',this)"><span class="icon">🍽️</span> Menu Manager</div>
+          <div class="adm-nav-item" onclick="admPage('images',this)"><span class="icon">🖼️</span> Images</div>
+          <div class="adm-nav-item" onclick="admPage('qr-mgmt',this)"><span class="icon">📲</span> QR & UPI</div>
+          <div class="adm-nav-item" onclick="admPage('settings',this)"><span class="icon">⚙️</span> Settings</div>
+        </nav>
+        <div class="adm-sidebar-footer">
+          <button class="adm-logout-btn" onclick="doLogout()">🚪 Logout</button>
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <main class="adm-main">
+
+        <!-- Dashboard Page -->
+        <div class="adm-page active" id="page-dashboard">
+          <div class="adm-page-title">Dashboard</div>
+          <div class="adm-page-sub">Overview of your restaurant website</div>
+          <div class="adm-stats">
+            <div class="adm-stat"><div class="s-icon">🍽️</div><div class="s-val" id="statItems">0</div><div class="s-label">Menu Items</div></div>
+            <div class="adm-stat"><div class="s-icon">📂</div><div class="s-val" id="statCats">0</div><div class="s-label">Categories</div></div>
+            <div class="adm-stat"><div class="s-icon">🖼️</div><div class="s-val" id="statImgs">6</div><div class="s-label">Gallery Images</div></div>
+            <div class="adm-stat"><div class="s-icon">📲</div><div class="s-val">UPI</div><div class="s-label">Payment Active</div></div>
+          </div>
+          <div class="adm-card">
+            <div class="adm-card-title">🚀 Quick Actions</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.8rem">
+              <button class="adm-btn-sm adm-btn-primary" onclick="admPage('menu-mgmt',document.querySelectorAll('.adm-nav-item')[1])">+ Add Menu Item</button>
+              <button class="adm-btn-sm adm-btn-primary" onclick="admPage('images',document.querySelectorAll('.adm-nav-item')[2])">🖼️ Manage Images</button>
+              <button class="adm-btn-sm adm-btn-primary" onclick="admPage('qr-mgmt',document.querySelectorAll('.adm-nav-item')[3])">📲 Update QR</button>
+              <button class="adm-btn-sm adm-btn-warning" onclick="admPage('settings',document.querySelectorAll('.adm-nav-item')[4])">⚙️ Settings</button>
+            </div>
+          </div>
+          <div class="adm-card">
+            <div class="adm-card-title">📋 Menu Summary</div>
+            <table class="adm-table" id="dashSummaryTable">
+              <thead><tr><th>Category</th><th>Items</th></tr></thead>
+              <tbody id="dashSummaryBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Menu Manager Page -->
+        <div class="adm-page" id="page-menu-mgmt">
+          <div class="adm-page-title">Menu Manager</div>
+          <div class="adm-page-sub">Add, edit or delete menu items and categories</div>
+          <!-- Add Category -->
+          <div class="adm-card">
+            <div class="adm-card-title">➕ Add New Category</div>
+            <div class="adm-form-row">
+              <div class="adm-form-group">
+                <label class="adm-label">Category Name</label>
+                <input class="adm-field" id="newCatName" placeholder="e.g. 🥗 Salads"/>
+              </div>
+              <div style="display:flex;align-items:flex-end;padding-bottom:1rem">
+                <button class="adm-btn-sm adm-btn-success" onclick="addCategory()">+ Add Category</button>
+              </div>
+            </div>
+          </div>
+          <!-- Add Item -->
+          <div class="adm-card">
+            <div class="adm-card-title">➕ Add New Menu Item</div>
+            <div class="adm-form-row">
+              <div class="adm-form-group">
+                <label class="adm-label">Category</label>
+                <select class="adm-field" id="newItemCat"></select>
+              </div>
+              <div class="adm-form-group">
+                <label class="adm-label">Item Name</label>
+                <input class="adm-field" id="newItemName" placeholder="e.g. Chicken Tikka"/>
+              </div>
+            </div>
+            <div class="adm-form-row">
+              <div class="adm-form-group">
+                <label class="adm-label">Price (₹)</label>
+                <input class="adm-field" id="newItemPrice" type="number" placeholder="e.g. 150"/>
+              </div>
+              <div style="display:flex;align-items:flex-end;padding-bottom:1rem">
+                <button class="adm-btn-sm adm-btn-success" onclick="addMenuItem()">+ Add Item</button>
+              </div>
+            </div>
+          </div>
+          <!-- Items Table -->
+          <div class="adm-card">
+            <div class="adm-card-title">📋 All Menu Items</div>
+            <div style="margin-bottom:1rem;display:flex;gap:.8rem;flex-wrap:wrap">
+              <input class="adm-field" id="menuSearch" placeholder="🔍 Search items..." style="max-width:260px" oninput="renderMenuTable()"/>
+              <select class="adm-field" id="menuFilterCat" style="max-width:220px" onchange="renderMenuTable()">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div style="overflow-x:auto">
+              <table class="adm-table">
+                <thead><tr><th>#</th><th>Item Name</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
+                <tbody id="menuTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Images Page -->
+        <div class="adm-page" id="page-images">
+          <div class="adm-page-title">Image Manager</div>
+          <div class="adm-page-sub">Update hero background, about section image, and gallery photos</div>
+          <!-- Hero & About -->
+          <div class="adm-card">
+            <div class="adm-card-title">🖼️ Section Images</div>
+            <div class="img-upload-grid" id="sectionImgsGrid"></div>
+          </div>
+          <!-- Gallery -->
+          <div class="adm-card">
+            <div class="adm-card-title">🗃️ Gallery Images
+              <button class="adm-btn-sm adm-btn-success" style="margin-left:auto" onclick="addGallerySlot()">+ Add Image</button>
+            </div>
+            <div class="img-upload-grid" id="galleryMgmtGrid"></div>
+          </div>
+        </div>
+
+        <!-- QR & UPI Page -->
+        <div class="adm-page" id="page-qr-mgmt">
+          <div class="adm-page-title">QR Code & UPI</div>
+          <div class="adm-page-sub">Update your UPI ID and QR code image shown in the order modal</div>
+          <div class="adm-card">
+            <div class="qr-mgmt">
+              <div>
+                <div class="adm-form-group">
+                  <label class="adm-label">UPI ID</label>
+                  <input class="adm-field" id="qrUpiId" placeholder="yourname@upi"/>
+                </div>
+                <div class="adm-form-group">
+                  <label class="adm-label">QR Code Image URL</label>
+                  <input class="adm-field" id="qrImgUrl" placeholder="https://... or paste base64"/>
+                  <p style="font-size:.75rem;color:var(--adm-muted);margin-top:.4rem">Paste any image URL or a base64 data URL. Generate your UPI QR from your bank app or PhonePe/GPay.</p>
+                </div>
+                <div class="adm-form-group">
+                  <label class="adm-label">Upload QR Image</label>
+                  <input type="file" accept="image/*" onchange="handleQrUpload(event)" style="color:var(--adm-text);font-size:.85rem"/>
+                </div>
+                <button class="adm-btn-sm adm-btn-success" onclick="saveQr()">💾 Save QR & UPI</button>
+              </div>
+              <div class="qr-preview-box">
+                <div style="font-size:.75rem;color:var(--adm-muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:2px">Live Preview</div>
+                <img id="qrPreviewImg" src="" alt="QR Preview" style="width:160px;height:160px;object-fit:contain;border-radius:8px;background:#fff;padding:.5rem;border:1px solid var(--adm-border)"/>
+                <div class="qr-uid" id="qrPreviewUid" style="margin-top:1rem;font-weight:700;color:var(--adm-text)">9082647911@fam</div>
+                <div class="qr-sub">UPI ID</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="adm-page" id="page-settings">
+          <div class="adm-page-title">Settings</div>
+          <div class="adm-page-sub">Update restaurant info displayed across the website</div>
+          <div class="adm-card">
+            <div class="adm-card-title">🏪 Restaurant Info</div>
+            <div class="settings-grid">
+              <div class="adm-form-group"><label class="adm-label">Restaurant Name</label><input class="adm-field" id="setName" placeholder="Cafe Aashiyana"/></div>
+              <div class="adm-form-group"><label class="adm-label">Tagline</label><input class="adm-field" id="setTagline" placeholder="We Serve The Best Quality Food"/></div>
+              <div class="adm-form-group"><label class="adm-label">Phone Number</label><input class="adm-field" id="setPhone" placeholder="+91 90826 47911"/></div>
+              <div class="adm-form-group"><label class="adm-label">WhatsApp Number (with country code)</label><input class="adm-field" id="setWa" placeholder="919082647911"/></div>
+              <div class="adm-form-group" style="grid-column:span 2"><label class="adm-label">Address</label><input class="adm-field" id="setAddress" placeholder="Full address..."/></div>
+              <div class="adm-form-group"><label class="adm-label">Admin Password</label><input class="adm-field" id="setNewPass" type="password" placeholder="New password (leave blank to keep)"/></div>
+            </div>
+            <button class="adm-btn-sm adm-btn-success" onclick="saveSettings()">💾 Save All Settings</button>
+          </div>
+          <div class="adm-card">
+            <div class="adm-card-title">🗑️ Data Management</div>
+            <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+              <button class="adm-btn-sm adm-btn-danger" onclick="resetAll()">⚠️ Reset All to Defaults</button>
+              <button class="adm-btn-sm adm-btn-warning" onclick="exportData()">📤 Export Data (JSON)</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="adm-toast" id="admToast"></div>
+
+<!-- ══════════════════════════════════════════
+     EDIT MENU ITEM MODAL
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="editModalBackdrop" onclick="if(event.target===this)closeEditModal()" style="z-index:999998">
+  <div class="modal">
+    <button class="modal-close" onclick="closeEditModal()">✕</button>
+    <div class="modal-header"><div class="label">Edit Menu Item</div><h3>Update Item Details</h3></div>
+    <input type="hidden" id="editItemCatIdx"/>
+    <input type="hidden" id="editItemIdx"/>
+    <div class="adm-form-group"><label class="adm-label" style="color:var(--muted)">Category</label><select class="adm-field" id="editItemCat" style="background:#f8f4ef;color:var(--charcoal)"></select></div>
+    <div class="adm-form-group"><label class="adm-label" style="color:var(--muted)">Item Name</label><input class="adm-field" id="editItemName" style="background:#f8f4ef;color:var(--charcoal)" placeholder="Item name"/></div>
+    <div class="adm-form-group"><label class="adm-label" style="color:var(--muted)">Price (₹)</label><input class="adm-field" id="editItemPrice" type="number" style="background:#f8f4ef;color:var(--charcoal)" placeholder="Price"/></div>
+    <button class="confirm-btn cod" onclick="saveEditItem()">💾 Save Changes</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════
+   DEFAULT DATA
+════════════════════════════════════════════════ */
+const DEFAULT_MENU = [
+  { category:"🍗 Spl. Chicken Boneless", items:[
+    {name:"Chicken Spl. Cream",price:180},{name:"Chicken Jungra",price:170},
+    {name:"Chicken Tawa",price:140},{name:"Chicken Chatpata",price:120},
+    {name:"Chicken Lazeez",price:120},{name:"Chicken Mumtaz",price:120}
+  ]},
+  { category:"🍖 Chicken", items:[
+    {name:"Chicken Biryani",price:120},{name:"Chicken Butter",price:85},
+    {name:"Chicken Aashiyana",price:85},{name:"Chicken Afghani",price:85},
+    {name:"Chicken Hyderabadi",price:85},{name:"Chicken Mughlai",price:85},
+    {name:"Chicken Handi",price:75},{name:"Chicken Kadai",price:75},
+    {name:"Chicken Do Pyaza",price:70},{name:"Chicken Masala Fry",price:85},
+    {name:"Chicken Steam Fry",price:65},{name:"Chicken Tandoor",price:65},
+    {name:"Chicken Dabaa Gosht",price:75}
+  ]},
+  { category:"🥩 Beef / Mutton", items:[
+    {name:"Mutton Paya",price:85},{name:"Mutton Aashiyana",price:75},
+    {name:"Mutton Afghani",price:75},{name:"Mutton Mughlai",price:70},
+    {name:"Mutton Kadai",price:70},{name:"Mutton Handi",price:70},
+    {name:"Mutton Rashida Gosht",price:65},{name:"Mutton Hyderabadi",price:70},
+    {name:"Mutton Do Pyaza",price:70},{name:"Mutton Dabba Gosht",price:65},
+    {name:"Mutton Masala Fry",price:60},{name:"Mutton Kurma",price:60},
+    {name:"Mutton Dal Gosht",price:50},{name:"Mutton Bhuna Fry",price:50},
+    {name:"Mutton Bheja Fry",price:45},{name:"Mutton Kaleja Fry",price:40}
+  ]},
+  { category:"🍳 Egg Dishes", items:[
+    {name:"Egg Masala Fry",price:45},{name:"Egg Tadka",price:45},
+    {name:"Egg Boil Bhurji",price:35},{name:"Egg Anda",price:24},{name:"Egg Bhurji",price:24}
+  ]}
+];
+
+const DEFAULT_GALLERY = [
+  {url:'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&q=80',emoji:'🍛'},
+  {url:'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&q=80',emoji:'🍗'},
+  {url:'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&q=80',emoji:'🥘'},
+  {url:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500&q=80',emoji:'🍳'},
+  {url:'https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=500&q=80',emoji:'🥗'},
+  {url:'https://images.unsplash.com/photo-1545247181-516773cae754?w=500&q=80',emoji:'🏮'}
+];
+
+const DEFAULT_SETTINGS = {
+  name:'Cafe Aashiyana',
+  tagline:'We Serve The Best Quality Food',
+  phone:'+91 90826 47911',
+  wa:'919082647911',
+  address:'Aashiyana Restaurant, Shivaji Nagar,\nGovandi, Mumbai – 400043',
+  upiId:'9082647911@fam',
+  qrUrl:'',
+  heroBg:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80',
+  aboutImg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
+  adminPass:'aashiyana2024'
+};
+
+/* ════════════════════════════════════════════════
+   STORAGE HELPERS
+════════════════════════════════════════════════ */
+function load(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+function save(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}}
+
+let menuData = load('ca_menu', DEFAULT_MENU);
+let galleryData = load('ca_gallery', DEFAULT_GALLERY);
+let settings = load('ca_settings', DEFAULT_SETTINGS);
+
+function saveAll(){save('ca_menu',menuData);save('ca_gallery',galleryData);save('ca_settings',settings)}
+
+/* ════════════════════════════════════════════════
+   APPLY SETTINGS TO PAGE
+════════════════════════════════════════════════ */
+function applySettings(){
+  document.getElementById('heroBgImg').style.backgroundImage=`url('${settings.heroBg}')`;
+  document.getElementById('aboutImg').style.backgroundImage=`url('${settings.aboutImg}')`;
+  document.getElementById('heroTagline').textContent=settings.tagline;
+  document.getElementById('contactAddress').innerHTML=settings.address.replace(/\n/g,'<br>');
+  document.getElementById('contactPhone').textContent=settings.phone;
+  document.getElementById('contactPhone').href='tel:'+settings.phone;
+  document.getElementById('contactUpi').textContent=settings.upiId;
+  document.getElementById('modalUpiId').textContent=settings.upiId;
+  const qrImg=document.getElementById('modalQrImg');
+  if(settings.qrUrl){qrImg.src=settings.qrUrl}else{drawFallbackQR()}
+}
+
+function drawFallbackQR(){
+  const canvas=document.createElement('canvas');canvas.width=140;canvas.height=140;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,140,140);ctx.fillStyle='#1A0A00';
+  const pattern=[[1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],[1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1],[1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1],[1,0,1,1,1,0,1,0,0,1,1,0,1,1,1,0,1],[1,0,1,1,1,0,1,0,1,1,0,0,1,1,1,0,1],[1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1],[1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[1,0,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0],[0,1,0,1,1,0,0,0,0,1,0,1,1,0,0,1,0],[1,1,1,1,1,1,1,0,1,0,1,1,0,1,1,0,1],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],[1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1],[1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1],[1,0,0,0,0,0,1,0,1,0,0,1,0,0,1,0,1],[1,1,1,1,1,1,1,0,0,1,1,0,1,0,0,1,1]];
+  const cell=140/17;
+  pattern.forEach((row,r)=>row.forEach((v,c)=>{if(v){ctx.fillRect(c*cell,r*cell,cell-1,cell-1)}}));
+  document.getElementById('modalQrImg').src=canvas.toDataURL();
+}
+
+/* ════════════════════════════════════════════════
+   BUILD MENU (FRONT-END)
+════════════════════════════════════════════════ */
+function buildMenu(){
+  const tabsEl=document.getElementById('menuTabs');
+  const contentEl=document.getElementById('menuContent');
+  tabsEl.innerHTML='';contentEl.innerHTML='';
+  menuData.forEach((cat,idx)=>{
+    const tab=document.createElement('button');
+    tab.className='menu-tab'+(idx===0?' active':'');
+    tab.textContent=cat.category;
+    tab.onclick=()=>{
+      document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.menu-category').forEach(c=>c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('cat-'+idx).classList.add('active');
+    };
+    tabsEl.appendChild(tab);
+    const div=document.createElement('div');
+    div.className='menu-category'+(idx===0?' active':'');
+    div.id='cat-'+idx;
+    const grid=document.createElement('div');grid.className='menu-grid';
+    cat.items.forEach(item=>{
+      const card=document.createElement('div');card.className='menu-item';
+      card.innerHTML=`<div class="menu-item-info"><div class="menu-item-name">${item.name}</div><div class="menu-item-price">₹${item.price}</div></div><button class="order-btn" onclick="openModal('${item.name.replace(/'/g,"\\'")}',${item.price})">Order Now</button>`;
+      grid.appendChild(card);
+    });
+    div.appendChild(grid);contentEl.appendChild(div);
+  });
+}
+
+/* ════════════════════════════════════════════════
+   BUILD GALLERY (FRONT-END)
+════════════════════════════════════════════════ */
+function buildGallery(){
+  const g=document.getElementById('galleryGrid');g.innerHTML='';
+  galleryData.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='gallery-item';
+    d.innerHTML=`<img src="${item.url}" alt="Gallery ${i+1}" loading="lazy"/><div class="gallery-overlay">${item.emoji||'🍽️'}</div>`;
+    g.appendChild(d);
+  });
+}
+
+/* ════════════════════════════════════════════════
+   ORDER MODAL
+════════════════════════════════════════════════ */
+let currentItem={name:'',price:0},currentQty=1,currentPayment='';
+function openModal(name,price){
+  currentItem={name,price};currentQty=1;currentPayment='';
+  document.getElementById('modalItemName').textContent=name;
+  document.getElementById('modalItemPrice').textContent='₹'+price;
+  updateQty();
+  document.querySelectorAll('input[name="payment"]').forEach(r=>r.checked=false);
+  document.getElementById('upiSection').classList.remove('show');
+  document.getElementById('confirmBtnText').textContent='Select Payment Method';
+  document.getElementById('confirmBtn').className='confirm-btn';
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modalBackdrop').classList.remove('open');document.body.style.overflow=''}
+function closeModalOnBackdrop(e){if(e.target===document.getElementById('modalBackdrop'))closeModal()}
+function changeQty(d){currentQty=Math.max(1,currentQty+d);updateQty()}
+function updateQty(){document.getElementById('qtyDisplay').textContent=currentQty;document.getElementById('totalDisplay').textContent='₹'+(currentItem.price*currentQty)}
+function selectPayment(method){
+  currentPayment=method;
+  document.getElementById(method==='cod'?'payCod':'payUpi').checked=true;
+  const us=document.getElementById('upiSection');
+  const btn=document.getElementById('confirmBtn');
+  const bt=document.getElementById('confirmBtnText');
+  if(method==='upi'){us.classList.add('show');btn.className='confirm-btn';bt.textContent='I Have Completed Payment'}
+  else{us.classList.remove('show');btn.className='confirm-btn cod';bt.textContent='Confirm Cash Order'}
+}
+function confirmOrder(){
+  if(!currentPayment){alert('Please select a payment method.');return}
+  const total=currentItem.price*currentQty;
+  const payLabel=currentPayment==='upi'?`UPI (${settings.upiId})`:'Cash on Delivery';
+  const msg=encodeURIComponent(`Hello Cafe Aashiyana,\nI want to place an order.\n\nItem: ${currentItem.name}\nQuantity: ${currentQty}\nTotal: ₹${total}\nPayment Method: ${payLabel}\n\nPlease confirm my order. Thank you!`);
+  closeModal();
+  window.open(`https://wa.me/${settings.wa}?text=${msg}`,'_blank');
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – LOGIN / LOGOUT
+════════════════════════════════════════════════ */
+function openAdmin(e){e.preventDefault();document.getElementById('adminOverlay').classList.add('open');document.getElementById('adminUser').value='';document.getElementById('adminPass').value='';document.body.style.overflow='hidden'}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.body.style.overflow=''}
+function doLogin(){
+  const u=document.getElementById('adminUser').value.trim();
+  const p=document.getElementById('adminPass').value;
+  if(u==='admin'&&p===settings.adminPass){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminDashboard').style.display='block';
+    populateAdmin();
+  } else {
+    document.getElementById('adminPass').style.borderColor='#e74c3c';
+    setTimeout(()=>document.getElementById('adminPass').style.borderColor='',1500);
+  }
+}
+function doLogout(){
+  document.getElementById('adminLogin').style.display='flex';
+  document.getElementById('adminDashboard').style.display='none';
+  closeAdmin();
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – PAGE NAVIGATION
+════════════════════════════════════════════════ */
+function admPage(id,el){
+  document.querySelectorAll('.adm-nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));
+  if(el)el.classList.add('active');
+  document.getElementById('page-'+id).classList.add('active');
+  if(id==='dashboard')refreshDashboard();
+  if(id==='menu-mgmt')renderMenuTable();
+  if(id==='images')renderImageManager();
+  if(id==='qr-mgmt')loadQrPage();
+  if(id==='settings')loadSettingsPage();
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – POPULATE
+════════════════════════════════════════════════ */
+function populateAdmin(){
+  refreshDashboard();
+  renderMenuTable();
+  refreshCatSelects();
+}
+
+function refreshDashboard(){
+  const total=menuData.reduce((a,c)=>a+c.items.length,0);
+  document.getElementById('statItems').textContent=total;
+  document.getElementById('statCats').textContent=menuData.length;
+  document.getElementById('statImgs').textContent=galleryData.length;
+  const tbody=document.getElementById('dashSummaryBody');tbody.innerHTML='';
+  menuData.forEach(cat=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${cat.category}</td><td><span class="adm-badge adm-badge-active">${cat.items.length} items</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function refreshCatSelects(){
+  ['newItemCat','menuFilterCat','editItemCat'].forEach(id=>{
+    const sel=document.getElementById(id);if(!sel)return;
+    const prev=sel.value;
+    sel.innerHTML=id==='menuFilterCat'?'<option value="">All Categories</option>':'';
+    menuData.forEach((cat,i)=>{
+      const opt=document.createElement('option');opt.value=i;opt.textContent=cat.category;sel.appendChild(opt);
+    });
+    if(prev)sel.value=prev;
+  });
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – MENU CRUD
+════════════════════════════════════════════════ */
+function addCategory(){
+  const name=document.getElementById('newCatName').value.trim();
+  if(!name){toast('Enter a category name','error');return}
+  menuData.push({category:name,items:[]});
+  saveAll();buildMenu();refreshCatSelects();renderMenuTable();refreshDashboard();
+  document.getElementById('newCatName').value='';
+  toast('Category added!');
+}
+
+function addMenuItem(){
+  const catIdx=parseInt(document.getElementById('newItemCat').value);
+  const name=document.getElementById('newItemName').value.trim();
+  const price=parseFloat(document.getElementById('newItemPrice').value);
+  if(isNaN(catIdx)||!name||isNaN(price)||price<=0){toast('Fill all fields correctly','error');return}
+  menuData[catIdx].items.push({name,price});
+  saveAll();buildMenu();renderMenuTable();refreshDashboard();
+  document.getElementById('newItemName').value='';document.getElementById('newItemPrice').value='';
+  toast('Menu item added!');
+}
+
+function deleteMenuItem(catIdx,itemIdx){
+  if(!confirm(`Delete "${menuData[catIdx].items[itemIdx].name}"?`))return;
+  menuData[catIdx].items.splice(itemIdx,1);
+  if(menuData[catIdx].items.length===0&&confirm('Category is now empty. Delete category too?')){menuData.splice(catIdx,1)}
+  saveAll();buildMenu();renderMenuTable();refreshDashboard();refreshCatSelects();
+  toast('Item deleted');
+}
+
+function openEditModal(catIdx,itemIdx){
+  const item=menuData[catIdx].items[itemIdx];
+  document.getElementById('editItemCatIdx').value=catIdx;
+  document.getElementById('editItemIdx').value=itemIdx;
+  refreshCatSelects();
+  document.getElementById('editItemCat').value=catIdx;
+  document.getElementById('editItemName').value=item.name;
+  document.getElementById('editItemPrice').value=item.price;
+  document.getElementById('editModalBackdrop').classList.add('open');
+}
+function closeEditModal(){document.getElementById('editModalBackdrop').classList.remove('open')}
+function saveEditItem(){
+  const oldCat=parseInt(document.getElementById('editItemCatIdx').value);
+  const itemIdx=parseInt(document.getElementById('editItemIdx').value);
+  const newCat=parseInt(document.getElementById('editItemCat').value);
+  const name=document.getElementById('editItemName').value.trim();
+  const price=parseFloat(document.getElementById('editItemPrice').value);
+  if(!name||isNaN(price)){toast('Fill all fields','error');return}
+  const item={name,price};
+  menuData[oldCat].items.splice(itemIdx,1);
+  menuData[newCat].items.push(item);
+  saveAll();buildMenu();renderMenuTable();refreshDashboard();closeEditModal();
+  toast('Item updated!');
+}
+
+function renderMenuTable(){
+  const search=(document.getElementById('menuSearch')||{value:''}).value.toLowerCase();
+  const filterCat=document.getElementById('menuFilterCat')?document.getElementById('menuFilterCat').value:'';
+  const tbody=document.getElementById('menuTableBody');tbody.innerHTML='';
+  let n=0;
+  menuData.forEach((cat,ci)=>{
+    if(filterCat!==''&&ci!==parseInt(filterCat))return;
+    cat.items.forEach((item,ii)=>{
+      if(search&&!item.name.toLowerCase().includes(search))return;
+      n++;const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${n}</td><td>${item.name}</td><td><span class="adm-badge adm-badge-cat">${cat.category}</span></td><td style="color:var(--adm-gold);font-weight:700">₹${item.price}</td><td><div class="adm-actions"><button class="adm-btn-sm adm-btn-warning" onclick="openEditModal(${ci},${ii})">✏️ Edit</button><button class="adm-btn-sm adm-btn-danger" onclick="deleteMenuItem(${ci},${ii})">🗑️</button></div></td>`;
+      tbody.appendChild(tr);
+    });
+  });
+  if(!n){const tr=document.createElement('tr');tr.innerHTML='<td colspan="5" style="text-align:center;color:var(--adm-muted);padding:2rem">No items found</td>';tbody.appendChild(tr)}
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – IMAGE MANAGER
+════════════════════════════════════════════════ */
+function renderImageManager(){
+  // Section images (hero, about)
+  const sGrid=document.getElementById('sectionImgsGrid');sGrid.innerHTML='';
+  const sections=[
+    {key:'heroBg',label:'Hero Background'},
+    {key:'aboutImg',label:'About Section Image'}
+  ];
+  sections.forEach(s=>{
+    const card=document.createElement('div');card.className='img-upload-card';
+    card.innerHTML=`
+      <img class="img-preview" src="${settings[s.key]}" alt="${s.label}" onerror="this.style.opacity='.3'"/>
+      <div class="img-info">
+        <div class="img-label">${s.label}</div>
+        <input class="img-url-input" value="${settings[s.key]}" placeholder="Image URL..." id="simg-${s.key}" oninput="previewSectionImg('${s.key}',this)"/>
+        <input type="file" accept="image/*" style="width:100%;font-size:.72rem;color:var(--adm-text);margin-bottom:.4rem" onchange="handleSectionImgUpload('${s.key}',event)"/>
+        <button class="adm-btn-sm adm-btn-success" style="width:100%" onclick="saveSectionImg('${s.key}')">💾 Save</button>
+      </div>`;
+    sGrid.appendChild(card);
+  });
+  // Gallery images
+  renderGalleryMgmt();
+}
+
+function previewSectionImg(key,input){
+  const card=input.closest('.img-upload-card');
+  const img=card.querySelector('.img-preview');
+  img.src=input.value;
+}
+
+function handleSectionImgUpload(key,event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    settings[key]=e.target.result;
+    const input=document.getElementById('simg-'+key);
+    if(input)input.value='[Uploaded Image]';
+    const card=input?input.closest('.img-upload-card'):null;
+    if(card){const img=card.querySelector('.img-preview');img.src=e.target.result}
+    saveAll();applySettings();toast('Image uploaded!');
+  };reader.readAsDataURL(file);
+}
+
+function saveSectionImg(key){
+  const val=document.getElementById('simg-'+key).value.trim();
+  if(!val){toast('Enter a URL','error');return}
+  settings[key]=val;saveAll();applySettings();toast('Image saved!');
+}
+
+function renderGalleryMgmt(){
+  const gGrid=document.getElementById('galleryMgmtGrid');gGrid.innerHTML='';
+  galleryData.forEach((item,i)=>{
+    const card=document.createElement('div');card.className='img-upload-card';
+    card.innerHTML=`
+      <img class="img-preview" src="${item.url}" alt="Gallery ${i+1}" onerror="this.style.opacity='.3'"/>
+      <div class="img-info">
+        <div class="img-label">Gallery Image ${i+1}</div>
+        <input class="img-url-input" value="${item.url}" placeholder="Image URL..." id="gimg-${i}" oninput="previewGalleryImg(${i},this)"/>
+        <input type="file" accept="image/*" style="width:100%;font-size:.72rem;color:var(--adm-text);margin-bottom:.4rem" onchange="handleGalleryUpload(${i},event)"/>
+        <input class="img-url-input" value="${item.emoji||'🍽️'}" placeholder="Emoji..." id="gemoji-${i}" style="width:60px"/>
+        <div style="display:flex;gap:.4rem;margin-top:.4rem">
+          <button class="adm-btn-sm adm-btn-success" style="flex:1" onclick="saveGalleryImg(${i})">💾</button>
+          <button class="adm-btn-sm adm-btn-danger" onclick="deleteGalleryImg(${i})">🗑️</button>
+        </div>
+      </div>`;
+    gGrid.appendChild(card);
+  });
+}
+
+function previewGalleryImg(i,input){
+  const card=input.closest('.img-upload-card');
+  const img=card.querySelector('.img-preview');img.src=input.value;
+}
+
+function handleGalleryUpload(i,event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    galleryData[i].url=e.target.result;
+    saveAll();buildGallery();renderGalleryMgmt();toast('Gallery image uploaded!');
+  };reader.readAsDataURL(file);
+}
+
+function saveGalleryImg(i){
+  const url=document.getElementById('gimg-'+i).value.trim();
+  const emoji=document.getElementById('gemoji-'+i).value.trim();
+  if(!url){toast('Enter a URL','error');return}
+  galleryData[i]={url,emoji:emoji||'🍽️'};
+  saveAll();buildGallery();renderGalleryMgmt();toast('Gallery image saved!');
+}
+
+function deleteGalleryImg(i){
+  if(!confirm('Delete this gallery image?'))return;
+  galleryData.splice(i,1);saveAll();buildGallery();renderGalleryMgmt();toast('Image deleted');
+}
+
+function addGallerySlot(){
+  galleryData.push({url:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80',emoji:'🍽️'});
+  saveAll();buildGallery();renderGalleryMgmt();toast('New gallery slot added');
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – QR & UPI
+════════════════════════════════════════════════ */
+function loadQrPage(){
+  document.getElementById('qrUpiId').value=settings.upiId||'';
+  document.getElementById('qrImgUrl').value=settings.qrUrl&&!settings.qrUrl.startsWith('data:')?settings.qrUrl:'';
+  updateQrPreview();
+}
+
+function updateQrPreview(){
+  document.getElementById('qrPreviewUid').textContent=document.getElementById('qrUpiId').value||settings.upiId;
+  const url=document.getElementById('qrImgUrl').value;
+  if(url)document.getElementById('qrPreviewImg').src=url;
+  else document.getElementById('qrPreviewImg').src=settings.qrUrl||'';
+}
+
+document.addEventListener('input',e=>{
+  if(e.target.id==='qrUpiId'||e.target.id==='qrImgUrl')updateQrPreview();
+});
+
+function handleQrUpload(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    settings.qrUrl=e.target.result;
+    document.getElementById('qrPreviewImg').src=e.target.result;
+    document.getElementById('qrImgUrl').value='[Uploaded Image]';
+    saveAll();applySettings();toast('QR image uploaded!');
+  };reader.readAsDataURL(file);
+}
+
+function saveQr(){
+  const upiId=document.getElementById('qrUpiId').value.trim();
+  const url=document.getElementById('qrImgUrl').value.trim();
+  if(!upiId){toast('Enter UPI ID','error');return}
+  settings.upiId=upiId;
+  if(url&&!url.startsWith('['))settings.qrUrl=url;
+  saveAll();applySettings();updateQrPreview();
+  toast('QR & UPI saved!');
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN – SETTINGS
+════════════════════════════════════════════════ */
+function loadSettingsPage(){
+  document.getElementById('setName').value=settings.name||'';
+  document.getElementById('setTagline').value=settings.tagline||'';
+  document.getElementById('setPhone').value=settings.phone||'';
+  document.getElementById('setWa').value=settings.wa||'';
+  document.getElementById('setAddress').value=settings.address||'';
+  document.getElementById('setNewPass').value='';
+}
+
+function saveSettings(){
+  settings.name=document.getElementById('setName').value.trim()||settings.name;
+  settings.tagline=document.getElementById('setTagline').value.trim()||settings.tagline;
+  settings.phone=document.getElementById('setPhone').value.trim()||settings.phone;
+  settings.wa=document.getElementById('setWa').value.trim()||settings.wa;
+  settings.address=document.getElementById('setAddress').value.trim()||settings.address;
+  const newPass=document.getElementById('setNewPass').value;
+  if(newPass)settings.adminPass=newPass;
+  saveAll();applySettings();toast('Settings saved!');
+}
+
+function resetAll(){
+  if(!confirm('Reset EVERYTHING to default? This cannot be undone.'))return;
+  menuData=JSON.parse(JSON.stringify(DEFAULT_MENU));
+  galleryData=JSON.parse(JSON.stringify(DEFAULT_GALLERY));
+  settings=JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+  saveAll();buildMenu();buildGallery();applySettings();populateAdmin();
+  toast('Reset to defaults');
+}
+
+function exportData(){
+  const data=JSON.stringify({menu:menuData,gallery:galleryData,settings:{...settings,adminPass:'[hidden]'}},null,2);
+  const blob=new Blob([data],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cafe-aashiyana-data.json';a.click();
+  toast('Data exported!');
+}
+
+/* ════════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════════ */
+let toastTimer;
+function toast(msg,type='success'){
+  const t=document.getElementById('admToast');
+  t.textContent=type==='success'?'✅ '+msg:'❌ '+msg;
+  t.className='adm-toast show'+(type==='error'?' error':'');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+/* ════════════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════════════ */
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.style.background=window.scrollY>50?'rgba(26,10,0,0.98)':'rgba(26,10,0,0.92)';
+});
+
+/* ════════════════════════════════════════════════
+   SCROLL FADE
+════════════════════════════════════════════════ */
+const fadeEls=document.querySelectorAll('.fade-up');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.1});
+fadeEls.forEach(el=>observer.observe(el));
+
+/* ════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════ */
+applySettings();
+buildMenu();
+buildGallery();
+</script>
+</body>
+</html>
